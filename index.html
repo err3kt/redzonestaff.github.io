@@ -1,0 +1,464 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Redzone Staff Team</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      color: #fff;
+      background: black;
+      overflow-x: hidden;
+    }
+    header {
+      background-color: rgba(41, 0, 0, 0.85);
+      padding: 1rem 2rem;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      position: relative;
+      z-index: 2;
+    }
+    h1 {
+      margin: 0;
+      font-size: 2rem;
+      color: #ff4d4d;
+    }
+    .search-container {
+      text-align: center;
+      margin: 1rem;
+    }
+    .search-container input {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 20px;
+      width: 50%;
+      max-width: 400px;
+      background-color: #330000;
+      color: #fff;
+    }
+    .category {
+      margin: 2rem;
+      position: relative;
+      z-index: 2;
+    }
+    .category h2 {
+      border-left: 5px solid #ff4d4d;
+      padding-left: 1rem;
+      color: #ff4d4d;
+    }
+    .staff-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    
+    .card {
+      background-color: #400000;
+      border-radius: 10px;
+      padding: 1rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+      cursor: pointer;
+      transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+      transform: scale(1.05);
+      background-color: #4d0000;
+      box-shadow: 0 0 15px 3px #ff4d4d;
+      border: 1px solid #ff4d4d;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      background-color: #4d0000;
+    }
+    .name {
+      font-weight: 600;
+      font-size: 1.2rem;
+    }
+    
+    
+    
+    .experience {
+      display: none;
+    }
+
+
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      color: #888;
+      margin-top: 2rem;
+      position: relative;
+      z-index: 2;
+    }
+    .background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://i.pinimg.com/originals/0b/3e/92/0b3e923bd8578b245510e6d5db272d7b.gif') center center / cover no-repeat fixed;
+      z-index: 0;
+      opacity: 0.25;
+    }
+  
+.card.closing .experience {
+  max-height: 0;
+  opacity: 0;
+  margin-top: 0;
+  transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal-frame {
+  border: 4px solid transparent;
+  padding: 2rem;
+  border-radius: 15px;
+  animation: redBorder 2s linear infinite;
+  background-color: rgba(26, 0, 0, 0.85);
+  position: relative;
+  max-width: 500px;
+  width: 90%;
+  color: white;
+}
+
+@keyframes redBorder {
+  0% {
+    border-color: #ff0000;
+  }
+  50% {
+    border-color: #800000;
+  }
+  100% {
+    border-color: #ff0000;
+  }
+}
+
+.modal-content {
+  text-align: center;
+}
+
+.modal-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.modal-experience {
+  margin-bottom: 2rem;
+  white-space: pre-line;
+}
+
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #4d0000;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+
+
+@keyframes fadeInZoom {
+  0% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.modal-frame {
+  animation: fadeInZoom 0.3s ease-out;
+}
+
+
+.card.warning {
+  background-color: #ffcc00;
+  color: black;
+  position: relative;
+}
+.card.warning::before {
+  content: "⚠️";
+  font-size: 1.5rem;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+.card .name small {
+  display: block;
+  font-weight: normal;
+  font-size: 0.9rem;
+}
+
+
+.ranking-btn {
+  width: 100%;
+  padding: 0.5rem;
+  border: none;
+  background-color: #4d0000;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.ranking-btn:hover {
+  background-color: #660000;
+}
+
+
+#rankingDisplay {
+  animation: fadeInZoom 0.3s ease-out;
+}
+#rankingList li {
+  background: #4d0000;
+  margin: 0.5rem 0;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  width: 100%;
+  max-width: 300px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(255, 77, 77, 0.5);
+}
+
+</style>
+</head>
+<body>
+<div class="background"></div>
+<header>
+<h1>Redzone Staff Team</h1>
+</header>
+<button id="rankingToggle" style="position: fixed; top: 1rem; right: 1rem; z-index: 10; background: #4d0000; color: white; border: none; padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer;">Rankings</button>
+
+<button id="teamWarnBtn" title="Team Warns"
+  style="position: fixed; top: 1rem; right: 7rem; z-index: 10; background: #ffcc00; color: black; border: none; padding: 0.5rem 0.8rem; border-radius: 8px; cursor: pointer; font-weight: bold;">
+  ⚠️
+</button>
+
+<div id="rankingPanel" style="position: fixed; top: 0; right: -300px; width: 300px; height: 100vh; background-color: rgba(26, 0, 0, 0.85); color: white; padding: 2rem 1rem; box-shadow: -2px 0 10px rgba(0,0,0,0.5); transition: right 0.4s ease; z-index: 9;">
+  <h3 style="color: #ff4d4d;">Rankings</h3>
+  <button class="ranking-btn" data-type="insgesamt">Insgesamt Ranking</button><br/><br/>
+  <button class="ranking-btn" data-type="moderation">Moderations Ranking</button><br/><br/>
+  <button class="ranking-btn" data-type="bots">Bot Ranking</button><br/><br/>
+  <button class="ranking-btn" data-type="commands">Bot Commands Ranking</button>
+</div>
+
+<div id="rankingDisplay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.9); color: white; display: none; flex-direction: column; align-items: center; justify-content: center; z-index: 8;">
+  <h2 id="rankingTitle"></h2>
+  <ul id="rankingList" style="list-style: none; padding: 0;"></ul>
+  <button onclick="document.getElementById('rankingDisplay').style.display='none'" style="margin-top: 1rem; background: #4d0000; color: white; border: none; padding: 0.5rem 1rem; border-radius: 8px;">Schließen</button>
+</div>
+
+
+<div class="category">
+<h2>Head Admin</h2>
+<div class="staff-list">
+<div class="card"><div class="name">Kazu</div><div class="experience">Moderation: 10/10<br/>Bots: 8/10<br/>Bot commands: 10/10<br/>Insgesamt: 28/30</div></div>
+</div>
+</div>
+<div class="category">
+<h2>Admins</h2>
+<div class="staff-list">
+<div class="card"><div class="name">Cloud</div><div class="experience">Moderation: 10/10<br/>Bots: 5/10<br/>Bot commands: 9,5/10<br/>Insgesamt: 24,5/10</div></div>
+<div class="card"><div class="name">Chen</div><div class="experience">Moderation: 9,5/10<br/>Bots: 5,5/10<br/>Bot commands: 8,5/10<br/>Insgesamt: 23,5/30</div></div>
+<div class="card"><div class="name">Cray</div><div class="experience">Moderation<br/>Bots<br/>Bot commands<br/>Insgesamt</div></div>
+</div>
+</div>
+<div class="category">
+<h2>Senior Moderator</h2>
+<div class="staff-list">
+<div class="card"><div class="name">Nox</div><div class="experience">Moderation: 9,5/10<br/>Bots: 0/10<br/>Bot commands: 7/10<br/>Insgesamt: 16,5/30</div></div>
+<div class="card"><div class="name">Ares</div><div class="experience">Moderation: 10/10<br/>Bots: 7,5/10<br/>Bot commands: 9,5/10<br/>Insgesamt: 27/30</div></div>
+</div>
+</div>
+<div class="category">
+<h2>Moderator</h2>
+<div class="staff-list">
+<div class="card"><div class="name">Devin</div><div class="experience">Moderation: 8,5/10<br/>Bots: 4,5/10<br/>Bot commands: 6,5/10<br/>Insgesamt: 19,5/30</div></div>
+<div class="card"><div class="name">Joel</div><div class="experience">Moderation: 7/10<br/>Bots: 1,5/10<br/>Bot commands: 8,5/10<br/>Insgesamt: 17/30</div></div>
+<div class="card"><div class="name">Mo</div><div class="experience">Moderation: 9/10<br/>Bots: 0,5/10<br/>Bot commands: 7/10<br/>Insgesamt: 16,5/30</div></div>
+</div>
+</div>
+<div class="category">
+<h2>Supporter</h2>
+<div class="staff-list">
+<div class="card"><div class="name">Noe</div><div class="experience">Moderation: 5/10<br/>Bots: 0,5/10<br/>Bot commands: 9/10<br/>Insgesamt: 14,5/30</div></div>
+<div class="card"><div class="name">Isa</div><div class="experience">Moderation<br/>Bots<br/>Bot commands<br/>Insgesamt</div></div>
+<div class="card"><div class="name">Lex</div><div class="experience">Moderation: 10/10<br/>Bots: 6,5/10<br/>Bot commands: 7/10<br/>Insgesamt: 23,5/30</div></div>
+<div class="card"><div class="name">Lev</div><div class="experience">Moderation<br/>Bots<br/>Bot commands<br/>Insgesamt</div></div>
+<div class="card"><div class="name">Jenny</div><div class="experience">Moderation<br/>Bots<br/>Bot commands<br/>Insgesamt</div></div>
+</div>
+</div>
+<div class="category">
+<h2>Test Supporter</h2>
+<div class="staff-list">
+<div class="card"><div class="name">Phil</div><div class="experience">Moderation: 6,5/10<br/>Bots: 0/10<br/>Bot commands: 0/10<br/>Insgesamt: 6,5/30</div></div>
+<div class="card"><div class="name">Claudio</div><div class="experience">Moderation<br/>Bots<br/>Bot commands<br/>Insgesamt</div></div>
+<div class="card"><div class="name">David</div><div class="experience">Moderation<br/>Bots<br/>Bot commands<br/>Insgesamt</div></div>
+<div class="card"><div class="name">Joy</div><div class="experience">Moderation: 0/10<br/>Bots: 0/10<br/>Bot commands: 0/10<br/>Insgesamt: 0/30</div></div>
+<div class="card"><div class="name">Lara</div><div class="experience">Moderation<br/>Bots<br/>Bot commands<br/>Insgesamt</div></div>
+<div class="card"><div class="name">Darius</div><div class="experience">Moderation<br/>Bots<br/>Bot commands<br/>Insgesamt</div></div>
+</div>
+</div>
+<div class="category">
+<h2 style="color:#ffcc00;border-left-color:#ffcc00;">Team Sperre</h2>
+<div class="staff-list">
+<div class="card warning"><div class="name">Panda</div><div class="name"><span style="font-size: 0.8rem;">Teamsperre: 1 Monat (23.07)</span></div><div class="experience">Moderation<br/>Bots<br/>Bot commands<br/>Insgesamt</div></div>
+<div class="card warning"><div class="name">Daddy</div><div class="name"><span style="font-size: 0.8rem;">Teamsperre: 1 Monat (23.07)</span></div><div class="experience">Moderation<br/>Bots<br/>Bot commands<br/>Insgesamt</div></div>
+</div>
+</div>
+<footer>
+    © 2025 Redzone Staff Team
+  </footer>
+
+<div class="overlay" id="overlay" style="display:none;">
+<div class="modal-frame">
+<div class="modal-content">
+<div class="modal-name" id="modalName"></div>
+<div class="modal-experience" id="modalExperience"></div>
+<button class="close-button" onclick="closeModal()">Schließen</button>
+</div>
+</div>
+</div><script>
+document.querySelectorAll('.card').forEach(card => {
+  card.addEventListener('click', () => {
+    const name = card.querySelector('.name').textContent;
+    const experience = card.querySelector('.experience').innerHTML.replace(/<br\s*\/?>/gi, '\n');
+    document.getElementById('modalName').textContent = name;
+    document.getElementById('modalExperience').textContent = experience;
+    document.getElementById('overlay').style.display = 'flex';
+  });
+});
+function closeModal() {
+  document.getElementById('overlay').style.display = 'none';
+}
+</script>
+<script>
+document.querySelectorAll('.card').forEach(card => {
+  card.addEventListener('click', () => {
+    const name = card.querySelector('.name').textContent;
+    const experience = card.querySelector('.experience').innerHTML.replace(/<br\s*\/?>/gi, '\n');
+    document.getElementById('modalName').textContent = name;
+    document.getElementById('modalExperience').textContent = experience;
+    document.getElementById('overlay').style.display = 'flex';
+  });
+});
+
+function closeModal() {
+  document.getElementById('overlay').style.display = 'none';
+}
+</script>
+
+
+<script>
+document.getElementById("rankingToggle").addEventListener("click", () => {
+  const panel = document.getElementById("rankingPanel");
+  panel.style.right = panel.style.right === "0px" ? "-300px" : "0px";
+});
+
+const rankings = {
+  insgesamt: [],
+  moderation: [],
+  bots: [],
+  commands: []
+};
+
+document.querySelectorAll(".card").forEach(card => {
+  const name = card.querySelector(".name").childNodes[0].nodeValue.trim();
+  const expText = card.querySelector(".experience").innerText;
+
+  const modMatch = expText.match(/Moderation:\s*([\d.,]+)/);
+  const botMatch = expText.match(/Bots:\s*([\d.,]+)/);
+  const cmdMatch = expText.match(/Bot commands:\s*([\d.,]+)/);
+  const sumMatch = expText.match(/Insgesamt:\s*([\d.,]+)/);
+
+  if (modMatch) rankings.moderation.push({ name, score: parseFloat(modMatch[1].replace(",", ".")) });
+  if (botMatch) rankings.bots.push({ name, score: parseFloat(botMatch[1].replace(",", ".")) });
+  if (cmdMatch) rankings.commands.push({ name, score: parseFloat(cmdMatch[1].replace(",", ".")) });
+  if (sumMatch) rankings.insgesamt.push({ name, score: parseFloat(sumMatch[1].replace(",", ".")) });
+});
+
+function showRanking(type) {
+  const list = document.getElementById("rankingList");
+  const title = document.getElementById("rankingTitle");
+
+  list.innerHTML = "";
+  const sorted = rankings[type].sort((a, b) => b.score - a.score).slice(0, 5);
+  sorted.forEach((entry, index) => {
+    const li = document.createElement("li");
+    li.innerText = `#${index + 1} ${entry.name} - ${entry.score}`;
+    list.appendChild(li);
+  });
+
+  title.innerText = type.charAt(0).toUpperCase() + type.slice(1) + " Ranking";
+  document.getElementById("rankingDisplay").style.display = "flex";
+}
+
+document.querySelectorAll(".ranking-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const type = btn.getAttribute("data-type");
+    showRanking(type);
+  });
+});
+</script>
+
+<div class="overlay" id="teamWarnOverlay" style="display:none;">
+  <div class="modal-frame">
+    <div class="modal-content">
+      <div class="modal-name">Team Warns</div>
+<div class="modal-experience" id="warnedMembersList" style="text-align: center; font-size: 1.1rem; line-height: 1.2;">
+	  <div><strong>Chen</strong> – 1 warn</div>
+	  <div><strong>Noe</strong> – 1 warn</div>
+	  <div><strong>Darius</strong> – 1 warn</div>
+	  <div><strong>Joel</strong> – 1 warn</div>
+	  </div>
+      <button class="close-button" onclick="document.getElementById('teamWarnOverlay').style.display='none'">Schließen</button>
+    </div>
+  </div>
+</div>
+
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  document.getElementById('teamWarnBtn').addEventListener('click', () => {
+    document.getElementById('teamWarnOverlay').style.display = 'flex';
+  });
+});
+</script>
+
+</body>
+</html>
