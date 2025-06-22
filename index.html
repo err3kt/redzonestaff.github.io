@@ -1,0 +1,332 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Redzone Staff Team</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      color: #fff;
+      background: black;
+      overflow-x: hidden;
+    }
+    header {
+      background-color: rgba(41, 0, 0, 0.85);
+      padding: 1rem 2rem;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      position: relative;
+      z-index: 2;
+    }
+    h1 {
+      margin: 0;
+      font-size: 2rem;
+      color: #ff4d4d;
+    }
+    .search-container {
+      text-align: center;
+      margin: 1rem;
+    }
+    .search-container input {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 20px;
+      width: 50%;
+      max-width: 400px;
+      background-color: #330000;
+      color: #fff;
+    }
+    .category {
+      margin: 2rem;
+      position: relative;
+      z-index: 2;
+    }
+    .category h2 {
+      border-left: 5px solid #ff4d4d;
+      padding-left: 1rem;
+      color: #ff4d4d;
+    }
+    .staff-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    
+    .card {
+      background-color: #400000;
+      border-radius: 10px;
+      padding: 1rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+      cursor: pointer;
+      transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+      transform: scale(1.05);
+      background-color: #4d0000;
+      box-shadow: 0 0 15px 3px #ff4d4d;
+      border: 1px solid #ff4d4d;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      background-color: #4d0000;
+    }
+    .name {
+      font-weight: 600;
+      font-size: 1.2rem;
+    }
+    
+    
+    
+    .experience {
+      display: none;
+    }
+
+
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      color: #888;
+      margin-top: 2rem;
+      position: relative;
+      z-index: 2;
+    }
+    .background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://i.pinimg.com/originals/0b/3e/92/0b3e923bd8578b245510e6d5db272d7b.gif') center center / cover no-repeat fixed;
+      z-index: 0;
+      opacity: 0.25;
+    }
+  
+.card.closing .experience {
+  max-height: 0;
+  opacity: 0;
+  margin-top: 0;
+  transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal-frame {
+  border: 4px solid transparent;
+  padding: 2rem;
+  border-radius: 15px;
+  animation: redBorder 2s linear infinite;
+  background-color: #1a0000;
+  position: relative;
+  max-width: 500px;
+  width: 90%;
+  color: white;
+}
+
+@keyframes redBorder {
+  0% {
+    border-color: #ff0000;
+  }
+  50% {
+    border-color: #800000;
+  }
+  100% {
+    border-color: #ff0000;
+  }
+}
+
+.modal-content {
+  text-align: center;
+}
+
+.modal-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.modal-experience {
+  margin-bottom: 2rem;
+  white-space: pre-line;
+}
+
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #4d0000;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+
+
+@keyframes fadeInZoom {
+  0% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.modal-frame {
+  animation: fadeInZoom 0.3s ease-out;
+}
+
+
+.card.warning {
+  background-color: #ffcc00;
+  color: black;
+  position: relative;
+}
+.card.warning::before {
+  content: "⚠️";
+  font-size: 1.5rem;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+.card .name small {
+  display: block;
+  font-weight: normal;
+  font-size: 0.9rem;
+}
+
+</style>
+</head>
+<body>
+<div class="background"></div>
+<header>
+<h1>Redzone Staff team</h1>
+</header>
+
+<div class="category">
+<h2>Head Admin</h2>
+<div class="staff-list">
+<div class="card"><div class="name">Kazu</div><div class="experience">Moderation: 10/10<br/>Bots: 8/10<br/>Bot commands: 10/10<br/>Insgesamt: 28/30</div></div>
+</div>
+</div>
+<div class="category">
+<h2>Admins</h2>
+<div class="staff-list">
+<div class="card"><div class="name">Cloud</div><div class="experience">Moderation<br/>Bots<br/>Bot commands<br/>Insgesamt</div></div>
+<div class="card"><div class="name">Chen</div><div class="experience">Moderation: 9,5/10<br/>Bots: 5,5/10<br/>Bot commands: 8,5/10<br/>Insgesamt: 23,5/30</div></div>
+<div class="card"><div class="name">Cray</div><div class="experience">Moderation<br/>Bots<br/>Bot commands<br/>Insgesamt</div></div>
+</div>
+</div>
+<div class="category">
+<h2>Senior Moderator</h2>
+<div class="staff-list">
+<div class="card"><div class="name">Nox</div><div class="experience">Moderation: 9,5/10<br/>Bots: 0/10<br/>Bot commands: 7/10<br/>Insgesamt: 16,5/30</div></div>
+<div class="card"><div class="name">Ares</div><div class="experience">Moderation<br/>Bots<br/>Bot commands<br/>Insgesamt</div></div>
+</div>
+</div>
+<div class="category">
+<h2>Moderator</h2>
+<div class="staff-list">
+<div class="card"><div class="name">Devin</div><div class="experience">Moderation: 8,5/10<br/>Bots: 4,5/10<br/>Bot commands: 6,5/10<br/>Insgesamt: 19,5/30</div></div>
+<div class="card"><div class="name">Joel</div><div class="experience">Moderation: 7/10<br/>Bots: 1,5/10<br/>Bot commands: 8,5/10<br/>Insgesamt: 17/30</div></div>
+<div class="card"><div class="name">Mo</div><div class="experience">Moderation: 9/10<br/>Bots: 0,5/10<br/>Bot commands: 7/10<br/>Insgesamt: 16,5/30</div></div>
+</div>
+</div>
+<div class="category">
+<h2>Supporter</h2>
+<div class="staff-list">
+<div class="card"><div class="name">Noe</div><div class="experience">Moderation: 5/10<br/>Bots: 0,5/10<br/>Bot commands: 9/10<br/>Insgesamt: 14,5/30</div></div>
+<div class="card"><div class="name">Isa</div><div class="experience">Moderation<br/>Bots<br/>Bot commands<br/>Insgesamt</div></div>
+<div class="card"><div class="name">Lex</div><div class="experience">Moderation: 10/10<br/>Bots: 6,5/10<br/>Bot commands: 7/10<br/>Insgesamt: 23,5/30</div></div>
+<div class="card"><div class="name">Lev</div><div class="experience">Moderation<br/>Bots<br/>Bot commands<br/>Insgesamt</div></div>
+<div class="card"><div class="name">Jenny</div><div class="experience">Moderation<br/>Bots<br/>Bot commands<br/>Insgesamt</div></div>
+</div>
+</div>
+<div class="category">
+<h2>Test Supporter</h2>
+<div class="staff-list">
+<div class="card"><div class="name">Phil</div><div class="experience">Moderation: 6,5/10<br/>Bots: 0/10<br/>Bot commands: 0/10<br/>Insgesamt: 6,5/30</div></div>
+<div class="card"><div class="name">Claudio</div><div class="experience">Moderation<br/>Bots<br/>Bot commands<br/>Insgesamt</div></div>
+<div class="card"><div class="name">David</div><div class="experience">Moderation<br/>Bots<br/>Bot commands<br/>Insgesamt</div></div>
+<div class="card"><div class="name">Joy</div><div class="experience">Moderation: 0/10<br/>Bots: 0/10<br/>Bot commands: 0/10<br/>Insgesamt: 0/30</div></div>
+<div class="card"><div class="name">Lara</div><div class="experience">Moderation<br/>Bots<br/>Bot commands<br/>Insgesamt</div></div>
+<div class="card"><div class="name">Darius</div><div class="experience">Moderation<br/>Bots<br/>Bot commands<br/>Insgesamt</div></div>
+</div>
+</div>
+<div class="category">
+<h2 style="color:#ffcc00;border-left-color:#ffcc00;">Team Sperre</h2>
+<div class="staff-list">
+<div class="card warning"><div class="name">Panda</div><div class="name"><span style="font-size: 0.8rem;">Teamsperre: 1 Monat (23.07)</span></div><div class="experience">Moderation<br/>Bots<br/>Bot commands<br/>Insgesamt</div></div>
+<div class="card warning"><div class="name">Daddy</div><div class="name"><span style="font-size: 0.8rem;">Teamsperre: 1 Monat (23.07)</span></div><div class="experience">Moderation<br/>Bots<br/>Bot commands<br/>Insgesamt</div></div>
+</div>
+</div>
+<footer>
+    © 2025 Redzone Staff Team
+  </footer>
+
+<div class="overlay" id="overlay" style="display:none;">
+<div class="modal-frame">
+<div class="modal-content">
+<div class="modal-name" id="modalName"></div>
+<div class="modal-experience" id="modalExperience"></div>
+<button class="close-button" onclick="closeModal()">Schließen</button>
+</div>
+</div>
+</div><script>
+document.querySelectorAll('.card').forEach(card => {
+  card.addEventListener('click', () => {
+    const name = card.querySelector('.name').textContent;
+    const experience = card.querySelector('.experience').innerHTML.replace(/<br\s*\/?>/gi, '\n');
+    document.getElementById('modalName').textContent = name;
+    document.getElementById('modalExperience').textContent = experience;
+    document.getElementById('overlay').style.display = 'flex';
+  });
+});
+function closeModal() {
+  document.getElementById('overlay').style.display = 'none';
+}
+</script>
+<script>
+document.querySelectorAll('.card').forEach(card => {
+  card.addEventListener('click', () => {
+    const name = card.querySelector('.name').textContent;
+    const experience = card.querySelector('.experience').innerHTML.replace(/<br\s*\/?>/gi, '\n');
+    document.getElementById('modalName').textContent = name;
+    document.getElementById('modalExperience').textContent = experience;
+    document.getElementById('overlay').style.display = 'flex';
+  });
+});
+
+function closeModal() {
+  document.getElementById('overlay').style.display = 'none';
+}
+</script>
+
+</body>
+</html>
